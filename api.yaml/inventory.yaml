@@ -47,13 +47,13 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../schema/inventory_req.yaml"
+            $ref: "../schema/inventory.yaml"
     '404':
       description: inventory not found
       content:
         application/json:
           schema: 
-            $ref: "../schema/inventory_req.yaml"
+            $ref: "../schema/inventory.yaml"
     
 put:
   summary: updating the inventory details
@@ -75,13 +75,13 @@ put:
       content:
         application/json:
           schema:
-            $ref: "../schema/inventory_req.yaml"
+            $ref: "../schema/inventory.yaml"
     '400':
       description: error not found
       content:
         application/json:
           schema:
-            $ref: "../schema/inventory_req.yaml"
+            $ref: "../schema/inventory.yaml"
 
 delete:
   summary: successfully deleted
@@ -96,18 +96,18 @@ delete:
     content:
       application/json:
         schema:
-          $ref: "../schema/inventory_req.yaml"
+          $ref: "../schema/inventory.yaml"
   response:
     '200':
       description: deleting the inventory details
       content:
         application/json:
           schema:
-            $ref: "../schema/inventory_req.yaml"
+            $ref: "../schema/inventory.yaml"
       '400':
         description: error not found
         content:
           application/json:
             schema:
-              $ref: "../schema/inventory_req.yaml"
+              $ref: "../schema/inventory.yaml"
       
