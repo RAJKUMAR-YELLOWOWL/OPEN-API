@@ -1,0 +1,13 @@
+type: object
+
+required:
+  - inventoryId
+
+
+properties:
+  inventoryId:
+    type: string
+  products:
+    type: array
+    items:
+      $ref: "./products.yaml"

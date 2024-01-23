@@ -1,0 +1,12 @@
+type: object
+required:  
+  - product
+  - quantity
+properties:
+  product: 
+    type: array
+    $ref: "./product.yaml"
+  quantity:
+    type: number
+    
+  

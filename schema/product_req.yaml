@@ -1,0 +1,15 @@
+type: object
+required:
+  - id
+  - name
+  - type
+  - price
+properties:
+  id:
+    type: string
+  name:
+    type: string
+  type:
+    type: string
+  price:
+    type: number
