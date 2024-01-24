@@ -1,0 +1,184 @@
+openapi: 3.0.0
+info:
+  title: api for billing system
+  version: 0.1.0
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Inventory:
+      type: object
+      required:
+        - inventoryId
+      properties:
+        inventoryId:
+          type: string
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Products'
+    Products:
+      type: object
+      properties:
+        product:
+          type: array
+          $ref: '#/components/schemas/Product'
+        quantity:
+          type: number
+    Product:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        price:
+          type: number
+    Inventory_optional:
+      type: object
+      required:
+        - inventoryId
+        - products
+      properties:
+        inventoryId:
+          type: string
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Products'
+    Products_optional:
+      $ref: '#/components/schemas/Product_optional'
+    Product_optional:
+      type: object
+      required:
+        - id
+        - name
+        - type
+        - price
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        price:
+          type: number
+paths:
+  /inventory:
+    post:
+      summary: storing the inventory
+      operationId: inventoryId
+      parameters:
+        name: inventoryId
+        required: true
+        in: path
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Inventory_optional'
+      response:
+        '200':
+          description: sucessfull
+          content:
+            schema:
+              $ref: '#/components/schemas/Inventory_optional'
+        '404':
+          description: error in storing inventory
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inventory_optional'
+    get:
+      summary: fetching the inventory details
+      operationId: inventoryId
+      parameters:
+        name: inventoryId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Inventory'
+      response:
+        '200':
+          description: inventory details sucessfully retrived
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inventory'
+        '404':
+          description: inventory not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inventory'
+    put:
+      summary: updating the inventory details
+      operationId: inventoryId
+      parameters:
+        name: inventoryId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Inventory'
+      response:
+        '200':
+          description: successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inventory'
+        '400':
+          description: error not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inventory'
+    delete:
+      summary: successfully deleted
+      operationId: inventoryId
+      parameters:
+        name: inventoryId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Inventory'
+      response:
+        '200':
+          '400':
+            description: error not found
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Inventory'
+          description: deleting the inventory details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inventory'

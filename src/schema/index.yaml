@@ -1,0 +1,14 @@
+Inventory:
+  $ref: "./inventory.yaml"
+Products:
+  $ref: "./products.yaml"
+Product:
+  $ref: "./product.yaml"
+
+Inventory_optional:
+  $ref: "./inventory_req.yaml"
+Products_optional:
+  $ref: "./product_req.yaml"
+Product_optional:
+  $ref: "./product_req.yaml"
+  
