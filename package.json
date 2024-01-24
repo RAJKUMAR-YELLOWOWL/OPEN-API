@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "swagger-cli bundle ./src/spec.yaml --outfile ./dist/spec.yaml --type yaml && node --loader ts-node/esm ./scripts/generate.ts"
+    "build": "swagger-cli bundle ./src/spec.yaml --outfile ./dist/spec.yaml --type yaml"
   },
   "author": "",
   "license": "ISC",

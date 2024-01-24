@@ -13,38 +13,6 @@ components:
       type: object
       required:
         - inventoryId
-      properties:
-        inventoryId:
-          type: string
-        products:
-          type: array
-          items:
-            $ref: '#/components/schemas/Products'
-    Products:
-      type: object
-      properties:
-        product:
-          type: array
-          $ref: '#/components/schemas/Product'
-        quantity:
-          type: number
-    Product:
-      type: object
-      required:
-        - id
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        type:
-          type: string
-        price:
-          type: number
-    Inventory_optional:
-      type: object
-      required:
-        - inventoryId
         - products
       properties:
         inventoryId:
@@ -52,10 +20,19 @@ components:
         products:
           type: array
           items:
-            $ref: '#/components/schemas/Products'
-    Products_optional:
-      $ref: '#/components/schemas/Product_optional'
-    Product_optional:
+            $ref: '#/paths/~1products/put/requestBody/content/application~1json/schema'
+    Products:
+      type: object
+      required:
+        - product
+        - quantity
+      properties:
+        product:
+          type: array
+          $ref: '#/components/schemas/Product_optional'
+        quantity:
+          type: number
+    Product:
       type: object
       required:
         - id
@@ -71,6 +48,60 @@ components:
           type: string
         price:
           type: number
+    shop:
+      type: object
+      required:
+        - id
+        - inventory
+        - location
+      properties:
+        id:
+          type: string
+        inventory:
+          type: array
+          items:
+            $ref: '#/components/schemas/Inventory'
+        location:
+          type: string
+    Inventory_optional:
+      type: object
+      required:
+        - inventoryId
+      properties:
+        inventoryId:
+          type: string
+        products:
+          type: array
+          items:
+            $ref: '#/paths/~1products/put/requestBody/content/application~1json/schema'
+    Products_optional:
+      $ref: '#/components/schemas/Product_optional'
+    Product_optional:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        price:
+          type: number
+    shop_optional:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+        inventory:
+          type: array
+          items:
+            $ref: '#/components/schemas/Inventory_optional'
+        location:
+          type: string
 paths:
   /inventory:
     post:
@@ -87,19 +118,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Inventory_optional'
-      response:
+              $ref: '#/components/schemas/Inventory'
+      responses:
         '200':
           description: sucessfull
           content:
-            schema:
-              $ref: '#/components/schemas/Inventory_optional'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inventory'
         '404':
           description: error in storing inventory
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Inventory_optional'
+                $ref: '#/components/schemas/Inventory'
     get:
       summary: fetching the inventory details
       operationId: inventoryId
@@ -114,20 +146,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Inventory'
-      response:
+              $ref: '#/components/schemas/Inventory_optional'
+      responses:
         '200':
           description: inventory details sucessfully retrived
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Inventory'
+                $ref: '#/components/schemas/Inventory_optional'
         '404':
           description: inventory not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Inventory'
+                $ref: '#/components/schemas/Inventory_optional'
     put:
       summary: updating the inventory details
       operationId: inventoryId
@@ -141,20 +173,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Inventory'
-      response:
+              $ref: '#/components/schemas/Inventory_optional'
+      responses:
         '200':
           description: successfully updated
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Inventory'
+                $ref: '#/components/schemas/Inventory_optional'
         '400':
           description: error not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Inventory'
+                $ref: '#/components/schemas/Inventory_optional'
     delete:
       summary: successfully deleted
       operationId: inventoryId
@@ -168,17 +200,249 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Inventory'
-      response:
+              $ref: '#/components/schemas/Inventory_optional'
+      responses:
         '200':
           '400':
             description: error not found
             content:
               application/json:
                 schema:
-                  $ref: '#/components/schemas/Inventory'
+                  $ref: '#/components/schemas/Inventory_optional'
           description: deleting the inventory details
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Inventory'
+                $ref: '#/components/schemas/Inventory_optional'
+  /shop:
+    post:
+      summary: posting the shop
+      oprationId: shopId
+      parameters:
+        name: shopId
+        required: true
+        in: path
+        schema:
+          type: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/shop'
+      responses:
+        '200':
+          description: sucessfull
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/shop'
+        '404':
+          description: failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/shop'
+    get:
+      summary: fetching the shop details
+      operationId: shopId
+      parameters:
+        name: shopId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/shop'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/shop'
+        '404':
+          description: failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/shop'
+    put:
+      summary: updating the shop details
+      operationId: shopId
+      parameters:
+        name: shopId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/shop_optional'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/shop_optional'
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/shop_optional'
+    delete:
+      summary: deleting the shop
+      operationId: shopId
+      parameters:
+        name: shopId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/shop_optional'
+      responses:
+        '200':
+          description: deleting the shop
+          content:
+            application/json:
+              schema:
+                type: ../schema/shop.yaml
+        '404':
+          description: shop not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/shop_optional'
+  /products:
+    post:
+      summary: posting the product
+      oprationId: productId
+      parameters:
+        name: productId
+        required: true
+        in: path
+        schema:
+          type: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Products'
+      responses:
+        '200':
+          description: sucessfull
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Products'
+        '404':
+          description: failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Products'
+    get:
+      summary: fetching the product details
+      operationId: productId
+      parameters:
+        name: productId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Products'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Products'
+        '404':
+          description: failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Products'
+    put:
+      summary: updating the product details
+      operationId: productId
+      parameters:
+        name: productId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                product:
+                  type: array
+                  $ref: '#/components/schemas/Product_optional'
+                quantity:
+                  type: number
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1products/put/requestBody/content/application~1json/schema'
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1products/put/requestBody/content/application~1json/schema'
+    delete:
+      summary: deleting the product
+      operationId: productId
+      parameters:
+        name: productId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/paths/~1products/put/requestBody/content/application~1json/schema'
+      responses:
+        '200':
+          description: deleting the product
+          content:
+            application/json:
+              schema:
+                type: ../schema/products.yaml
+        '404':
+          description: shop not found
+          content:
+            application/json:
+              schema:
+                type: ../schema/products.yaml

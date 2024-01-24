@@ -13,12 +13,13 @@ post:
       application/json:
         schema:
           $ref: "../schema/inventory_req.yaml"
-  response:
+  responses:
     '200':
       description: sucessfull
       content: 
-        schema:  
-          $ref: "../schema/inventory_req.yaml"
+        application/json:
+          schema:  
+            $ref: "../schema/inventory_req.yaml"
     '404':
       description: error in storing inventory
       content: 
@@ -41,7 +42,7 @@ get:
       application/json:
         schema:
           $ref: "../schema/inventory.yaml"
-  response:
+  responses:
     '200':
       description: inventory details sucessfully retrived
       content:
@@ -69,7 +70,7 @@ put:
       application/json:
         schema:
           $ref: "../schema/inventory.yaml"
-  response:
+  responses:
     '200':
       description: successfully updated
       content:
@@ -97,7 +98,7 @@ delete:
       application/json:
         schema:
           $ref: "../schema/inventory.yaml"
-  response:
+  responses:
     '200':
       description: deleting the inventory details
       content:

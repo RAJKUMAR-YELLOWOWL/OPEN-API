@@ -1,0 +1,112 @@
+post:
+  summary: posting the shop
+  oprationId: shopId
+  parameters:
+    name: shopId
+    required: true
+    in: path
+    schema:
+      type: true
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../schema/shop_req.yaml"
+  responses:
+    '200':
+      description: sucessfull
+      content: 
+        application/json:
+          schema:  
+            $ref: "../schema/shop_req.yaml"
+    '404':
+      description: failed
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/shop_req.yaml"
+get:
+  summary: fetching the shop details
+  operationId: shopId
+  parameters: 
+    name: shopId
+    in: path
+    required: true
+    schema: 
+      type: string
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../schema/shop_req.yaml"
+  responses: 
+    '200':
+      description: success
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/shop_req.yaml"
+    '404':
+      description: failed
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/shop_req.yaml"
+put:
+      summary: updating the shop details
+      operationId: shopId
+      parameters:
+        name: shopId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "../schema/shop.yaml"
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: "../schema/shop.yaml"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: "../schema/shop.yaml"
+delete:
+      summary: deleting the shop
+      operationId: shopId
+      parameters:
+        name: shopId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "../schema/shop.yaml"
+      responses:
+        '200':
+          description: deleting the shop
+          content:
+            application/json:
+              schema:
+                type: "../schema/shop.yaml"
+        '404':
+          description: shop not found
+          content:
+            application/json:
+              schema:
+                $ref: "../schema/shop.yaml"

@@ -1,0 +1,114 @@
+post:
+  summary: posting the product
+  oprationId: productId
+  parameters:
+    name: productId
+    required: true
+    in: path
+    schema:
+      type: true
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../schema/products_req.yaml"
+  responses:
+    '200':
+      description: sucessfull
+      content: 
+        application/json:
+          schema:  
+            $ref: "../schema/products_req.yaml"
+    '404':
+      description: failed
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/products_req.yaml"
+get:
+  summary: fetching the product details
+  operationId: productId
+  parameters: 
+    name: productId
+    in: path
+    required: true
+    schema: 
+      type: string
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../schema/products_req.yaml"
+  responses: 
+    '200':
+      description: success
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/products_req.yaml"
+    '404':
+      description: failed
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/products_req.yaml"
+put:
+      summary: updating the product details
+      operationId: productId
+      parameters:
+        name: productId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+           schema:
+            $ref: "../schema/products.yaml"
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: "../schema/products.yaml"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: "../schema/products.yaml"
+delete:
+      summary: deleting the product
+      operationId: productId
+      parameters:
+        name: productId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "../schema/products.yaml"
+      responses:
+        '200':
+          description: deleting the product
+          content:
+            application/json:
+              schema:
+                type: "../schema/products.yaml"
+        '404':
+          description: shop not found
+          content:
+            application/json:
+              schema:
+                type: "../schema/products.yaml"
+            
+          

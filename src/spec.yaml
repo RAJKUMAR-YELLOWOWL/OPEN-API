@@ -13,3 +13,8 @@ components:
 paths:  
   /inventory:
     $ref: "./api/inventory_api.yaml"
+  /shop:
+    $ref: "./api/shop_api.yaml"
+  /products:
+    $ref: "./api/products_api.yaml"
+    

@@ -1,0 +1,16 @@
+type: object
+
+required:
+  - id
+  - inventory
+  - location
+
+properties:
+  id:
+    type: string
+  inventory: 
+    type: array
+    items:
+      $ref: "../schema/inventory_req.yaml"
+  location:
+    type: string
