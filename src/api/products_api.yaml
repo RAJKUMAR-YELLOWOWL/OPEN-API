@@ -1,12 +1,6 @@
 post:
-  summary: posting the product
-  oprationId: productId
-  parameters:
-    name: productId
-    required: true
-    in: path
-    schema:
-      type: true
+  summary: Adding the product
+  oprationId: AddingProductById
   requestBody:
     required: true
     content:
@@ -14,26 +8,26 @@ post:
         schema:
           $ref: "../schema/products_req.yaml"
   responses:
-    '200':
-      description: sucessfull
-      content: 
-        application/json:
-          schema:  
-            $ref: "../schema/products_req.yaml"
-    '404':
-      description: failed
+    "200":
+      description: Product added successfully
       content:
         application/json:
           schema:
-            $ref: "../schema/products_req.yaml"
+            $ref: "../schema/successResponse.yaml"
+    "404":
+      description: Error adding the product
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/errorResponse.yaml"
 get:
-  summary: fetching the product details
-  operationId: productId
-  parameters: 
+  summary: Getting the product
+  operationId: GettingproductById
+  parameters:
     name: productId
     in: path
     required: true
-    schema: 
+    schema:
       type: string
   requestBody:
     required: true
@@ -41,74 +35,72 @@ get:
       application/json:
         schema:
           $ref: "../schema/products_req.yaml"
-  responses: 
-    '200':
-      description: success
+  responses:
+    "200":
+      description: Product fetched successfully
       content:
         application/json:
           schema:
             $ref: "../schema/products_req.yaml"
-    '404':
-      description: failed
+    "404":
+      description: Error fetching the product
       content:
         application/json:
           schema:
-            $ref: "../schema/products_req.yaml"
+            $ref: "../schema/errorResponse.yaml"
 put:
-      summary: updating the product details
-      operationId: productId
-      parameters:
-        name: productId
-        in: path
-        required: true
+  summary: Updating the product
+  operationId: UpdateProductById
+  parameters:
+    name: productId
+    in: path
+    required: true
+    schema:
+      type: string
+  requestBody:
+    required: true
+    content:
+      application/json:
         schema:
-          type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-           schema:
-            $ref: "../schema/products.yaml"
-      responses:
-        '200':
-          description: success
-          content:
-            application/json:
-              schema:
-                $ref: "../schema/products.yaml"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                $ref: "../schema/products.yaml"
+          $ref: "../schema/products.yaml"
+  responses:
+    "200":
+      description: Product successfully updated
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/successResponse.yaml"
+    "404":
+      description: Error updating the product
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/errorResponse.yaml"
 delete:
-      summary: deleting the product
-      operationId: productId
-      parameters:
-        name: productId
-        in: path
-        required: true
+  summary: Deleting the product
+  operationId: DeleteProductById
+  parameters:
+    name: productId
+    in: path
+    required: true
+    schema:
+      type: string
+  requestBody:
+    required: true
+    content:
+      application/json:
         schema:
-          type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "../schema/products.yaml"
-      responses:
-        '200':
-          description: deleting the product
-          content:
-            application/json:
-              schema:
-                type: "../schema/products.yaml"
-        '404':
-          description: shop not found
-          content:
-            application/json:
-              schema:
-                type: "../schema/products.yaml"
-            
-          
+          $ref: "../schema/successResponse.yaml"
+  responses:
+    "200":
+      description: Product deleted successfully
+      content:
+        application/json:
+          schema:
+            type: "../schema/successResponse.yaml"
+    "404":
+      description: Error deleting the product
+      content:
+        application/json:
+          schema:
+            type: "../schema/errorResponse.yaml"

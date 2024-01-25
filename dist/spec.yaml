@@ -14,7 +14,10 @@ components:
       required:
         - inventoryId
         - products
+        - shopId
       properties:
+        shopId:
+          type: string
         inventoryId:
           type: string
         products:
@@ -26,7 +29,13 @@ components:
       required:
         - product
         - quantity
+        - shopId
+        - InventoryId
       properties:
+        shopId:
+          type: string
+        inventoryId:
+          type: string
         product:
           type: array
           $ref: '#/components/schemas/Product_optional'
@@ -40,8 +49,6 @@ components:
         - type
         - price
       properties:
-        id:
-          type: string
         name:
           type: string
         type:
@@ -62,6 +69,39 @@ components:
           items:
             $ref: '#/components/schemas/Inventory'
         location:
+          type: string
+    errorResponse:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          description: Detailed description of the error
+          type: string
+    ShopId_InventoryId:
+      type: object
+      required:
+        - inventoryId
+        - shopId
+      properties:
+        shopId:
+          type: string
+        inventoryId:
+          type: string
+    successResponse:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          description: Success message
+          type: string
+    user:
+      type: object
+      required:
+        - userId
+      properties:
+        userId:
           type: string
     Inventory_optional:
       type: object
@@ -105,14 +145,8 @@ components:
 paths:
   /inventory:
     post:
-      summary: storing the inventory
-      operationId: inventoryId
-      parameters:
-        name: inventoryId
-        required: true
-        in: path
-        schema:
-          type: string
+      summary: Adding the inventory
+      operationId: AddingInventoryById
       requestBody:
         required: true
         content:
@@ -121,20 +155,20 @@ paths:
               $ref: '#/components/schemas/Inventory'
       responses:
         '200':
-          description: sucessfull
+          description: Inventory added successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Inventory'
+                $ref: '#/components/schemas/successResponse'
         '404':
-          description: error in storing inventory
+          description: Error adding inventory
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Inventory'
+                $ref: '#/components/schemas/errorResponse'
     get:
-      summary: fetching the inventory details
-      operationId: inventoryId
+      summary: Getting the inventory details
+      operationId: GettingInventoryById
       parameters:
         name: inventoryId
         in: path
@@ -149,20 +183,20 @@ paths:
               $ref: '#/components/schemas/Inventory_optional'
       responses:
         '200':
-          description: inventory details sucessfully retrived
+          description: Inventory details fetched successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Inventory_optional'
+                $ref: '#/components/schemas/successResponse'
         '404':
-          description: inventory not found
+          description: Error fetching inventory
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Inventory_optional'
+                $ref: '#/components/schemas/errorResponse'
     put:
-      summary: updating the inventory details
-      operationId: inventoryId
+      summary: Updating the inventory details
+      operationId: UpdateInventoryById
       parameters:
         name: inventoryId
         in: path
@@ -176,19 +210,19 @@ paths:
               $ref: '#/components/schemas/Inventory_optional'
       responses:
         '200':
-          description: successfully updated
+          description: Inventory updated success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Inventory_optional'
-        '400':
-          description: error not found
+                $ref: '#/components/schemas/successResponse'
+        '404':
+          description: Error updating the inventory
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Inventory_optional'
+                $ref: '#/components/schemas/errorResponse'
     delete:
-      summary: successfully deleted
+      summary: Deleting the inventory
       operationId: inventoryId
       parameters:
         name: inventoryId
@@ -208,22 +242,16 @@ paths:
             content:
               application/json:
                 schema:
-                  $ref: '#/components/schemas/Inventory_optional'
-          description: deleting the inventory details
+                  $ref: '#/components/schemas/errorResponse'
+          description: Inventory deleted successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Inventory_optional'
+                $ref: '#/components/schemas/successResponse'
   /shop:
     post:
-      summary: posting the shop
-      oprationId: shopId
-      parameters:
-        name: shopId
-        required: true
-        in: path
-        schema:
-          type: true
+      summary: Adding the shop
+      oprationId: AddShopById
       requestBody:
         required: true
         content:
@@ -232,48 +260,20 @@ paths:
               $ref: '#/components/schemas/shop'
       responses:
         '200':
-          description: sucessfull
+          description: Shop added successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/shop'
-        '404':
-          description: failed
+                $ref: '#/components/schemas/successResponse'
+        '500':
+          description: server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/shop'
+                $ref: '#/components/schemas/errorResponse'
     get:
-      summary: fetching the shop details
-      operationId: shopId
-      parameters:
-        name: shopId
-        in: path
-        required: true
-        schema:
-          type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/shop'
-      responses:
-        '200':
-          description: success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/shop'
-        '404':
-          description: failed
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/shop'
-    put:
-      summary: updating the shop details
-      operationId: shopId
+      summary: Getting the shop details
+      operationId: GettingShopById
       parameters:
         name: shopId
         in: path
@@ -288,17 +288,45 @@ paths:
               $ref: '#/components/schemas/shop_optional'
       responses:
         '200':
-          description: success
+          description: Shop fetched successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/shop_optional'
+                $ref: '#/components/schemas/shop'
+        '404':
+          description: Error fetching shop
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+    put:
+      summary: Updating the shop details
+      operationId: UpdateShopById
+      parameters:
+        name: shopId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/shop_optional'
+      responses:
+        '200':
+          description: Updated the shop details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/successResponse'
         '404':
           description: not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/shop_optional'
+                $ref: '#/components/schemas/errorResponse'
     delete:
       summary: deleting the shop
       operationId: shopId
@@ -320,23 +348,17 @@ paths:
           content:
             application/json:
               schema:
-                type: ../schema/shop.yaml
+                type: ../schema/successResponse.yaml
         '404':
           description: shop not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/shop_optional'
+                $ref: '#/components/schemas/errorResponse'
   /products:
     post:
-      summary: posting the product
-      oprationId: productId
-      parameters:
-        name: productId
-        required: true
-        in: path
-        schema:
-          type: true
+      summary: Adding the product
+      oprationId: AddingProductById
       requestBody:
         required: true
         content:
@@ -345,20 +367,20 @@ paths:
               $ref: '#/components/schemas/Products'
       responses:
         '200':
-          description: sucessfull
+          description: Product added successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Products'
+                $ref: '#/components/schemas/successResponse'
         '404':
-          description: failed
+          description: Error adding the product
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Products'
+                $ref: '#/components/schemas/errorResponse'
     get:
-      summary: fetching the product details
-      operationId: productId
+      summary: Getting the product
+      operationId: GettingproductById
       parameters:
         name: productId
         in: path
@@ -373,20 +395,20 @@ paths:
               $ref: '#/components/schemas/Products'
       responses:
         '200':
-          description: success
+          description: Product fetched successfully
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Products'
         '404':
-          description: failed
+          description: Error fetching the product
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Products'
+                $ref: '#/components/schemas/errorResponse'
     put:
-      summary: updating the product details
-      operationId: productId
+      summary: Updating the product
+      operationId: UpdateProductById
       parameters:
         name: productId
         in: path
@@ -400,6 +422,10 @@ paths:
             schema:
               type: object
               properties:
+                shopId:
+                  type: string
+                inventoryId:
+                  type: string
                 product:
                   type: array
                   $ref: '#/components/schemas/Product_optional'
@@ -407,20 +433,20 @@ paths:
                   type: number
       responses:
         '200':
-          description: success
+          description: Product successfully updated
           content:
             application/json:
               schema:
-                $ref: '#/paths/~1products/put/requestBody/content/application~1json/schema'
+                $ref: '#/components/schemas/successResponse'
         '404':
-          description: not found
+          description: Error updating the product
           content:
             application/json:
               schema:
-                $ref: '#/paths/~1products/put/requestBody/content/application~1json/schema'
+                $ref: '#/components/schemas/errorResponse'
     delete:
-      summary: deleting the product
-      operationId: productId
+      summary: Deleting the product
+      operationId: DeleteProductById
       parameters:
         name: productId
         in: path
@@ -432,17 +458,101 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/paths/~1products/put/requestBody/content/application~1json/schema'
+              $ref: '#/components/schemas/successResponse'
       responses:
         '200':
-          description: deleting the product
+          description: Product deleted successfully
           content:
             application/json:
               schema:
-                type: ../schema/products.yaml
+                type: ../schema/successResponse.yaml
         '404':
-          description: shop not found
+          description: Error deleting the product
           content:
             application/json:
               schema:
-                type: ../schema/products.yaml
+                type: ../schema/errorResponse.yaml
+  /allInventory:
+    get:
+      summary: Getting all the inventories
+      operationId: GetAllInventoryByShopId
+      parameters:
+        name: userId
+        required: true
+        in: path
+        schema: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShopId_InventoryId'
+      responses:
+        '200':
+          description: All inventories fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inventory_optional'
+        '404':
+          description: Error fetching the inventory
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+  /allProducts:
+    get:
+      summary: Getting all the products
+      operationId: GetAllProductByInventoryId
+      parameters:
+        name: userId
+        required: true
+        in: path
+        schema: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShopId_InventoryId'
+      responses:
+        '200':
+          description: All products fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1products/put/requestBody/content/application~1json/schema'
+        '404':
+          description: Error fetching the products
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+  /allShops:
+    get:
+      summary: Getting all the shops
+      operationId: GetAllShopByUserId
+      parameters:
+        name: userId
+        required: true
+        in: path
+        schema: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
+      responses:
+        '200':
+          description: all the shops fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/shop'
+        '404':
+          description: failed fetching the shops
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'

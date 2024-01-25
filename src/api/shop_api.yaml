@@ -1,12 +1,6 @@
 post:
-  summary: posting the shop
-  oprationId: shopId
-  parameters:
-    name: shopId
-    required: true
-    in: path
-    schema:
-      type: true
+  summary: Adding the shop
+  oprationId: AddShopById
   requestBody:
     required: true
     content:
@@ -15,20 +9,20 @@ post:
           $ref: "../schema/shop_req.yaml"
   responses:
     '200':
-      description: sucessfull
+      description: Shop added successfully
       content: 
         application/json:
           schema:  
-            $ref: "../schema/shop_req.yaml"
-    '404':
-      description: failed
+            $ref: "../schema/successResponse.yaml"
+    '500':
+      description: server error
       content:
         application/json:
           schema:
-            $ref: "../schema/shop_req.yaml"
+            $ref: "../schema/errorResponse.yaml"
 get:
-  summary: fetching the shop details
-  operationId: shopId
+  summary: Getting the shop details
+  operationId: GettingShopById
   parameters: 
     name: shopId
     in: path
@@ -40,23 +34,23 @@ get:
     content:
       application/json:
         schema:
-          $ref: "../schema/shop_req.yaml"
+          $ref: "../schema/shop.yaml"
   responses: 
     '200':
-      description: success
+      description: Shop fetched successfully
       content:
         application/json:
           schema:
             $ref: "../schema/shop_req.yaml"
     '404':
-      description: failed
+      description: Error fetching shop
       content:
         application/json:
           schema:
-            $ref: "../schema/shop_req.yaml"
+            $ref: "../schema/errorResponse.yaml"
 put:
-      summary: updating the shop details
-      operationId: shopId
+      summary: Updating the shop details
+      operationId: UpdateShopById
       parameters:
         name: shopId
         in: path
@@ -71,17 +65,17 @@ put:
               $ref: "../schema/shop.yaml"
       responses:
         '200':
-          description: success
+          description: Updated the shop details
           content:
             application/json:
               schema:
-                $ref: "../schema/shop.yaml"
+                $ref: "../schema/successResponse.yaml"
         '404':
           description: not found
           content:
             application/json:
               schema:
-                $ref: "../schema/shop.yaml"
+                $ref: "../schema/errorResponse.yaml"
 delete:
       summary: deleting the shop
       operationId: shopId
@@ -103,10 +97,10 @@ delete:
           content:
             application/json:
               schema:
-                type: "../schema/shop.yaml"
+                type: "../schema/successResponse.yaml"
         '404':
           description: shop not found
           content:
             application/json:
               schema:
-                $ref: "../schema/shop.yaml"
+                $ref: "../schema/errorResponse.yaml"

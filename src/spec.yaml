@@ -17,4 +17,10 @@ paths:
     $ref: "./api/shop_api.yaml"
   /products:
     $ref: "./api/products_api.yaml"
+  /allInventory:
+    $ref: "./api/getAllInventory.yaml"
+  /allProducts:
+    $ref: "./api/getAllProducts.yaml"
+  /allShops:
+    $ref: "./api/getAllShops.yaml"
     

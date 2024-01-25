@@ -1,12 +1,6 @@
 post:
-  summary: storing the inventory
-  operationId: inventoryId
-  parameters:
-    name: inventoryId
-    required: true
-    in: path
-    schema: 
-      type: string
+  summary: Adding the inventory
+  operationId: AddingInventoryById
   requestBody:
     required: true
     content:
@@ -15,21 +9,21 @@ post:
           $ref: "../schema/inventory_req.yaml"
   responses:
     '200':
-      description: sucessfull
+      description: Inventory added successfully
       content: 
         application/json:
           schema:  
-            $ref: "../schema/inventory_req.yaml"
+            $ref: "../schema/successResponse.yaml"
     '404':
-      description: error in storing inventory
+      description: Error adding inventory
       content: 
         application/json:
           schema:
-            $ref: "../schema/inventory_req.yaml"
+            $ref: "../schema/errorResponse.yaml"
 
 get:
-  summary: fetching the inventory details
-  operationId: inventoryId
+  summary: Getting the inventory details
+  operationId: GettingInventoryById
   parameters:
     name: inventoryId
     in: path
@@ -44,21 +38,21 @@ get:
           $ref: "../schema/inventory.yaml"
   responses:
     '200':
-      description: inventory details sucessfully retrived
+      description: Inventory details fetched successfully
       content:
         application/json:
           schema:
-            $ref: "../schema/inventory.yaml"
+            $ref: "../schema/successResponse.yaml"
     '404':
-      description: inventory not found
+      description: Error fetching inventory
       content:
         application/json:
           schema: 
-            $ref: "../schema/inventory.yaml"
+            $ref: "../schema/errorResponse.yaml"
     
 put:
-  summary: updating the inventory details
-  operationId: inventoryId
+  summary: Updating the inventory details
+  operationId: UpdateInventoryById
   parameters:
     name: inventoryId
     in: path
@@ -72,20 +66,20 @@ put:
           $ref: "../schema/inventory.yaml"
   responses:
     '200':
-      description: successfully updated
+      description: Inventory updated success
       content:
         application/json:
           schema:
-            $ref: "../schema/inventory.yaml"
-    '400':
-      description: error not found
+            $ref: "../schema/successResponse.yaml"
+    '404':
+      description: Error updating the inventory 
       content:
         application/json:
           schema:
-            $ref: "../schema/inventory.yaml"
+            $ref: "../schema/errorResponse.yaml"
 
 delete:
-  summary: successfully deleted
+  summary: Deleting the inventory
   operationId: inventoryId
   parameters:
     name: inventoryId
@@ -100,15 +94,14 @@ delete:
           $ref: "../schema/inventory.yaml"
   responses:
     '200':
-      description: deleting the inventory details
+      description: Inventory deleted successfully
       content:
         application/json:
           schema:
-            $ref: "../schema/inventory.yaml"
+            $ref: "../schema/successResponse.yaml"
       '400':
         description: error not found
         content:
           application/json:
             schema:
-              $ref: "../schema/inventory.yaml"
-      
+              $ref: "../schema/errorResponse.yaml"

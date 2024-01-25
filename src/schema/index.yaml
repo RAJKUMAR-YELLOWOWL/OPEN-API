@@ -6,6 +6,14 @@ Product:
   $ref: "./product_req.yaml"
 shop:
   $ref: "./shop_req.yaml"
+errorResponse:
+  $ref: "./errorResponse.yaml"
+ShopId_InventoryId:
+  $ref: "./ShopId_InventoryId.yaml"
+successResponse:
+  $ref: "./successResponse.yaml"
+user:
+  $ref: "./user.yaml"
 
 
 Inventory_optional:
