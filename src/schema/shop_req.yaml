@@ -2,15 +2,13 @@ type: object
 
 required:
   - id
-  - inventory
+  - shopName
   - location
 
 properties:
   id:
     type: string
-  inventory: 
-    type: array
-    items:
-      $ref: "../schema/inventory_req.yaml"
+  shopName:
+    type: string
   location:
     type: string

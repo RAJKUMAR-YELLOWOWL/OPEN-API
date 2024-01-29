@@ -1,27 +1,22 @@
-Inventory:
+AddingInventory:
   $ref: "./inventory_req.yaml"
-Products:
+AddingProducts:
   $ref: "./products_req.yaml"
-Product:
+AddingProduct:
   $ref: "./product_req.yaml"
-shop:
-  $ref: "./shop_req.yaml"
 errorResponse:
   $ref: "./errorResponse.yaml"
-ShopId_InventoryId:
-  $ref: "./ShopId_InventoryId.yaml"
 successResponse:
   $ref: "./successResponse.yaml"
-user:
-  $ref: "./user.yaml"
 
 
-Inventory_optional:
+
+GeetingInventory:
   $ref: "./inventory.yaml"
-Products_optional:
+GettingProducts:
+  $ref: "./products.yaml"
+GettingProduct:
   $ref: "./product.yaml"
-Product_optional:
-  $ref: "./product.yaml"
-shop_optional:
+GettingShop:
   $ref: "./shop.yaml"
   

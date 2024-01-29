@@ -20,10 +20,17 @@ get:
       content: 
         application/json:
           schema:  
-            $ref: "../schema/products_req.yaml"
+            $ref: "../schema/products.yaml"
     '404':
       description: Error fetching the products
       content:
         application/json:
           schema:
             $ref: "../schema/errorResponse.yaml"
+    "500":
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/errorResponse.yaml"
+

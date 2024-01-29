@@ -20,69 +20,28 @@ post:
         application/json:
           schema:
             $ref: "../schema/errorResponse.yaml"
+
+
 get:
-  summary: Getting the shop details
-  operationId: gettingShopByShopId
-  parameters:
-    name: shopId
-    in: path
-    required: true
-    schema:
-      type: string
+  summary: Getting all the shops
+  operationId: getAllShopByUserId
   responses:
-    "200":
-      description: Shop fetched successfully
-      content:
+    '200':
+      description: All the shops fetched successfully
+      content: 
         application/json:
-          schema:
+          schema:  
             $ref: "../schema/shop_req.yaml"
-    "404":
-      description: Error fetching shop
+    '404':
+      description: failed fetching the shops
       content:
         application/json:
           schema:
             $ref: "../schema/errorResponse.yaml"
-put:
-  summary: Updating the shop details
-  operationId: updateShopByShopId
-  parameters:
-    name: shopId
-    in: path
-    required: true
-    schema:
-      type: string
-  responses:
-    "200":
-      description: Updated the shop details
-      content:
-        application/json:
-          schema:
-            $ref: "../schema/successResponse.yaml"
-    "404":
-      description: not found
+    "500":
+      description: Internal server error
       content:
         application/json:
           schema:
             $ref: "../schema/errorResponse.yaml"
-delete:
-  summary: Deleting the shop
-  operationId: deleteShopByShopId
-  parameters:
-    name: shopId
-    in: path
-    required: true
-    schema:
-      type: string
-  responses:
-    "200":
-      description: Deleting the shop
-      content:
-        application/json:
-          schema:
-            type: "../schema/successResponse.yaml"
-    "404":
-      description: Shop not found
-      content:
-        application/json:
-          schema:
-            $ref: "../schema/errorResponse.yaml"
+

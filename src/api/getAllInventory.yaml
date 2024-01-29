@@ -13,9 +13,15 @@ get:
       content: 
         application/json:
           schema:  
-            $ref: "../schema/inventory_req.yaml"
+            $ref: "../schema/inventory.yaml"
     '404':
       description: Error fetching the inventory
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/errorResponse.yaml"
+    "500":
+      description: Internal server error
       content:
         application/json:
           schema:

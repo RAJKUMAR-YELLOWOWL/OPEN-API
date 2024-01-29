@@ -10,17 +10,24 @@ components:
       bearerFormat: JWT
   schemas:
     $ref: "./schema/index.yaml"
-paths:  
-  /inventory:
+paths:
+
+  
+  /shops/inventory/{shopId}:
+    $ref: "./api/getAllInventories.yaml"
+  /shops/inventory/{shopId}{InventoryId}:
+    $ref: "./api/putDelInventory.yaml"
+  /shops/inventory/:
     $ref: "./api/inventory_api.yaml"
-  /shop:
+  /shops/{shopId}:
+    $ref: "./api/putDelShops.yaml"
+  /shops:
     $ref: "./api/shop_api.yaml"
-  /products:
-    $ref: "./api/products_api.yaml"
-  /allInventory:
-    $ref: "./api/getAllInventory.yaml"
-  /allProducts:
+  /shops/inventory/products/{shopId}/{inventoryId}:
     $ref: "./api/getAllProducts.yaml"
-  /allShops:
-    $ref: "./api/getAllShops.yaml"
+  /shops/inventory/products/{shopId}/{InventoryId}/{productId}:
+    $ref: "./api/putDelProducts.yaml"
+  /shops/inventory/products:
+    $ref: "./api/inventory_api.yaml"
+  
     

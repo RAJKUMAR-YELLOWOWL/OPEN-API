@@ -1,13 +1,17 @@
 type: object
 required:
-
-  - id
-  - name
+  - shopId
+  - inventoryId
+  - productId
+  - productname
   - type
   - price
 properties:
-
-  name:
+  shopId:
+    type: string
+  inventoryId:
+    type: string
+  productId:
     type: string
   type:
     type: string

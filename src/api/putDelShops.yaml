@@ -1,0 +1,57 @@
+put:
+  summary: Updating the shop details
+  operationId: updateShopByShopId
+  parameters:
+    name: shopId
+    in: path
+    required: true
+    schema:
+      type: string
+  responses:
+    "200":
+      description: Updated the shop details
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/successResponse.yaml"
+    "404":
+      description: not found
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/errorResponse.yaml"
+    "500":
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/errorResponse.yaml"
+
+delete:
+  summary: Deleting the shop
+  operationId: deleteShopByShopId
+  parameters:
+    name: shopId
+    in: path
+    required: true
+    schema:
+      type: string
+  responses:
+    "200":
+      description: Deleting the shop
+      content:
+        application/json:
+          schema:
+            type: "../schema/successResponse.yaml"
+    "404":
+      description: Shop not found
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/errorResponse.yaml"
+    "500":
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/errorResponse.yaml"
