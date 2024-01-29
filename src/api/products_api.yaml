@@ -20,38 +20,6 @@ post:
         application/json:
           schema:
             $ref: "../schema/errorResponse.yaml"
-get:
-  summary: Getting the product
-  operationId: gettingProductByProductId
-  parameters:
-  - name: shopId
-    in: path
-    required: true
-    schema:
-      type: string
-  - name: inventoryId
-    in: path
-    required: true
-    schema:
-      type: string
-  - name: productId
-    in: path
-    required: true
-    schema:
-      type: string
-  responses:
-    "200":
-      description: Product fetched successfully
-      content:
-        application/json:
-          schema:
-            $ref: "../schema/products_req.yaml"
-    "404":
-      description: Error fetching the product
-      content:
-        application/json:
-          schema:
-            $ref: "../schema/errorResponse.yaml"
 put:
   summary: Updating the product
   operationId: updateProductByProductId
