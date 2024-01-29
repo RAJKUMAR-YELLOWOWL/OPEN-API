@@ -1,0 +1,28 @@
+get:
+  summary: Getting all the inventories
+  operationId: getAllInventoryByShopId
+  parameters:
+    name: shopId
+    required: true
+    in: path
+    schema: 
+     type: string
+  responses:
+    '200':
+      description: All inventories fetched successfully
+      content: 
+        application/json:
+          schema:  
+            $ref: "../schema/inventory.yaml"
+    '404':
+      description: Error fetching the inventory
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/errorResponse.yaml"
+    "500":
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/errorResponse.yaml"

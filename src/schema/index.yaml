@@ -1,0 +1,22 @@
+AddingInventory:
+  $ref: "./inventory_req.yaml"
+AddingProducts:
+  $ref: "./products_req.yaml"
+AddingProduct:
+  $ref: "./product_req.yaml"
+errorResponse:
+  $ref: "./errorResponse.yaml"
+successResponse:
+  $ref: "./successResponse.yaml"
+
+
+
+GeetingInventory:
+  $ref: "./inventory.yaml"
+GettingProducts:
+  $ref: "./products.yaml"
+GettingProduct:
+  $ref: "./product.yaml"
+GettingShop:
+  $ref: "./shop.yaml"
+  

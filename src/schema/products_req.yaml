@@ -2,7 +2,13 @@ type: object
 required:  
   - product
   - quantity
+  - shopId
+  - InventoryId
 properties:
+  shopId:
+    type: string
+  inventoryId:
+    type: string
   product: 
     type: array
     $ref: "./product.yaml"

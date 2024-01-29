@@ -1,0 +1,30 @@
+post:
+  summary: Adding the product
+  oprationId: addingProduct
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../schema/products_req.yaml"
+  responses:
+    "200":
+      description: Product added successfully
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/successResponse.yaml"
+    "404":
+      description: Error adding the product
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/errorResponse.yaml"
+    "500":
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/errorResponse.yaml"
+
+

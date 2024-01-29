@@ -1,0 +1,32 @@
+post:
+  summary: Adding the inventory
+  operationId: addingInventory
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../schema/inventory_req.yaml"
+  responses:
+    '200':
+      description: Inventory added successfully
+      content: 
+        application/json:
+          schema:  
+            $ref: "../schema/successResponse.yaml"
+    '404':
+      description: Error adding inventory
+      content: 
+        application/json:
+          schema:
+            $ref: "../schema/errorResponse.yaml"
+    "500":
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/errorResponse.yaml"
+
+    
+
+

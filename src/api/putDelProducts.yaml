@@ -1,0 +1,77 @@
+put:
+  summary: Updating the product
+  operationId: updatingProductByInventoryId
+  parameters:
+  - name: shopId
+    in: path
+    required: true
+    schema:
+      type: string
+  - name: inventoryId
+    in: path
+    required: true
+    schema:
+      type: string
+  - name: productId
+    in: path
+    required: true
+    schema:
+      type: string
+  responses:
+    "200":
+      description: Product successfully updated
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/successResponse.yaml"
+    "404":
+      description: Error updating the product
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/errorResponse.yaml"
+    "500":
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/errorResponse.yaml"
+
+delete:
+  summary: Deleting the product
+  operationId: deletingProductByInventoryId
+  parameters:
+  - name: shopId
+    in: path
+    required: true
+    schema:
+      type: string
+  - name: inventoryId
+    in: path
+    required: true
+    schema:
+      type: string
+  - name: productId
+    in: path
+    required: true
+    schema:
+      type: string
+  responses:
+    "200":
+      description: Product deleted successfully
+      content:
+        application/json:
+          schema:
+            type: "../schema/successResponse.yaml"
+    "404":
+      description: Error deleting the product
+      content:
+        application/json:
+          schema:
+            type: "../schema/errorResponse.yaml"
+    "500":
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/errorResponse.yaml"

@@ -1,0 +1,47 @@
+post:
+  summary: Adding the shop
+  oprationId: addShopByShopId
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../schema/shop_req.yaml"
+  responses:
+    "200":
+      description: Shop added successfully
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/successResponse.yaml"
+    "500":
+      description: server error
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/errorResponse.yaml"
+
+
+get:
+  summary: Getting all the shops
+  operationId: getAllShopByUserId
+  responses:
+    '200':
+      description: All the shops fetched successfully
+      content: 
+        application/json:
+          schema:  
+            $ref: "../schema/shop_req.yaml"
+    '404':
+      description: failed fetching the shops
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/errorResponse.yaml"
+    "500":
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/errorResponse.yaml"
+

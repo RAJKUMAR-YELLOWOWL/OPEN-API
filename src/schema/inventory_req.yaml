@@ -1,0 +1,15 @@
+type: object
+
+required:
+  - shopId
+  - inventoryId
+  - inventoryName
+
+properties:
+  shopId:
+    type: string
+  inventoryId:
+    type: string
+  inventoryName:
+    type: string
+

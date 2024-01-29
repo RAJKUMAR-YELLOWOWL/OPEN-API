@@ -1,0 +1,33 @@
+openapi: 3.0.0
+info:
+  title: api for billing system
+  version: 0.1.0
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    $ref: "./schema/index.yaml"
+paths:
+
+  
+  /shops/inventory/{shopId}:
+    $ref: "./api/getAllInventories.yaml"
+  /shops/inventory/{shopId}{InventoryId}:
+    $ref: "./api/putDelInventory.yaml"
+  /shops/inventory/:
+    $ref: "./api/inventory_api.yaml"
+  /shops/{shopId}:
+    $ref: "./api/putDelShops.yaml"
+  /shops:
+    $ref: "./api/shop_api.yaml"
+  /shops/inventory/products/{shopId}/{inventoryId}:
+    $ref: "./api/getAllProducts.yaml"
+  /shops/inventory/products/{shopId}/{InventoryId}/{productId}:
+    $ref: "./api/putDelProducts.yaml"
+  /shops/inventory/products:
+    $ref: "./api/inventory_api.yaml"
+  
+    

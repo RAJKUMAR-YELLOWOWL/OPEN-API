@@ -1,6 +1,10 @@
 type: object
 
 properties:
+  shopId:
+    type: string
+  inventoryId:
+    type: string
   product: 
     type: array
     $ref: "./product.yaml"

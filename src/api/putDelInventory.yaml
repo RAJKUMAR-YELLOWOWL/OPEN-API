@@ -1,0 +1,68 @@
+put:
+  summary: Updating the inventory details
+  operationId: updatingInventoryByShopId
+  parameters:
+  - name: inventoryId
+    in: path
+    required: true
+    schema: 
+      type: string
+  - name: shopId
+    in: path
+    required: true
+    schema: 
+      type: string
+  responses:
+    '200':
+      description: Inventory updated success
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/successResponse.yaml"
+    '404':
+      description: Error updating the inventory 
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/errorResponse.yaml"
+    "500":
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/errorResponse.yaml"
+
+
+delete:
+  summary: Deleting the inventory
+  operationId: deletingInventoryByShopId
+  parameters:
+  - name: inventoryId
+    in: path
+    required: true
+    schema: 
+      type: string
+  - name: shopId
+    in: path
+    required: true
+    schema: 
+      type: string
+  responses:
+    '200':
+      description: Inventory deleted successfully
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/successResponse.yaml"
+      '400':
+        description: error not found
+        content:
+          application/json:
+            schema:
+              $ref: "../schema/errorResponse.yaml"
+      "500":
+        description: Internal server error
+        content:
+          application/json:
+            schema:
+              $ref: "../schema/errorResponse.yaml"

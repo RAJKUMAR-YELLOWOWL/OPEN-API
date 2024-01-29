@@ -1,0 +1,14 @@
+type: object
+
+required:
+  - id
+  - shopName
+  - location
+
+properties:
+  id:
+    type: string
+  shopName:
+    type: string
+  location:
+    type: string
