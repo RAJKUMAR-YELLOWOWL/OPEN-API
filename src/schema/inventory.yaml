@@ -2,10 +2,13 @@ type: object
 
 required:
   - inventoryId
+  - inventoryName
 
 
 properties:
   inventoryId:
+    type: string
+  inventoryName:
     type: string
   products:
     type: array

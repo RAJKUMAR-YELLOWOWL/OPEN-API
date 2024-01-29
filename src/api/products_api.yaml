@@ -1,6 +1,6 @@
 post:
   summary: Adding the product
-  oprationId: AddingProductById
+  oprationId: addingProductByProductId
   requestBody:
     required: true
     content:
@@ -22,19 +22,23 @@ post:
             $ref: "../schema/errorResponse.yaml"
 get:
   summary: Getting the product
-  operationId: GettingproductById
+  operationId: gettingProductByProductId
   parameters:
-    name: productId
+  - name: shopId
     in: path
     required: true
     schema:
       type: string
-  requestBody:
+  - name: inventoryId
+    in: path
     required: true
-    content:
-      application/json:
-        schema:
-          $ref: "../schema/products_req.yaml"
+    schema:
+      type: string
+  - name: productId
+    in: path
+    required: true
+    schema:
+      type: string
   responses:
     "200":
       description: Product fetched successfully
@@ -50,19 +54,23 @@ get:
             $ref: "../schema/errorResponse.yaml"
 put:
   summary: Updating the product
-  operationId: UpdateProductById
+  operationId: updateProductByProductId
   parameters:
-    name: productId
+  - name: shopId
     in: path
     required: true
     schema:
       type: string
-  requestBody:
+  - name: inventoryId
+    in: path
     required: true
-    content:
-      application/json:
-        schema:
-          $ref: "../schema/products.yaml"
+    schema:
+      type: string
+  - name: productId
+    in: path
+    required: true
+    schema:
+      type: string
   responses:
     "200":
       description: Product successfully updated
@@ -78,19 +86,23 @@ put:
             $ref: "../schema/errorResponse.yaml"
 delete:
   summary: Deleting the product
-  operationId: DeleteProductById
+  operationId: deleteProductByProductId
   parameters:
-    name: productId
+  - name: shopId
     in: path
     required: true
     schema:
       type: string
-  requestBody:
+  - name: inventoryId
+    in: path
     required: true
-    content:
-      application/json:
-        schema:
-          $ref: "../schema/successResponse.yaml"
+    schema:
+      type: string
+  - name: productId
+    in: path
+    required: true
+    schema:
+      type: string
   responses:
     "200":
       description: Product deleted successfully

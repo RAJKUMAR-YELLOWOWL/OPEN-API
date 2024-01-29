@@ -1,24 +1,19 @@
 get:
   summary: Getting all the shops
-  operationId: GetAllShopByUserId
+  operationId: getAllShopByUserId
   parameters:
     name: userId
     required: true
     in: path
-    schema: true
-  requestBody:
-    required: true
-    content:
-      application/json:
-        schema:
-          $ref: "../schema/user.yaml"
+    schema: 
+      type: string
   responses:
     '200':
-      description: all the shops fetched successfully
+      description: All the shops fetched successfully
       content: 
         application/json:
           schema:  
-            $ref: "../schema/shop_req.yaml"
+            $ref: "../schema/shop.yaml"
     '404':
       description: failed fetching the shops
       content:

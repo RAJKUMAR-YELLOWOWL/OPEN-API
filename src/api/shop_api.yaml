@@ -1,6 +1,6 @@
 post:
   summary: Adding the shop
-  oprationId: AddShopById
+  oprationId: addShopByShopId
   requestBody:
     required: true
     content:
@@ -8,13 +8,13 @@ post:
         schema:
           $ref: "../schema/shop_req.yaml"
   responses:
-    '200':
+    "200":
       description: Shop added successfully
-      content: 
+      content:
         application/json:
-          schema:  
+          schema:
             $ref: "../schema/successResponse.yaml"
-    '500':
+    "500":
       description: server error
       content:
         application/json:
@@ -22,85 +22,67 @@ post:
             $ref: "../schema/errorResponse.yaml"
 get:
   summary: Getting the shop details
-  operationId: GettingShopById
-  parameters: 
+  operationId: gettingShopByShopId
+  parameters:
     name: shopId
     in: path
     required: true
-    schema: 
+    schema:
       type: string
-  requestBody:
-    required: true
-    content:
-      application/json:
-        schema:
-          $ref: "../schema/shop.yaml"
-  responses: 
-    '200':
+  responses:
+    "200":
       description: Shop fetched successfully
       content:
         application/json:
           schema:
             $ref: "../schema/shop_req.yaml"
-    '404':
+    "404":
       description: Error fetching shop
       content:
         application/json:
           schema:
             $ref: "../schema/errorResponse.yaml"
 put:
-      summary: Updating the shop details
-      operationId: UpdateShopById
-      parameters:
-        name: shopId
-        in: path
-        required: true
-        schema:
-          type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "../schema/shop.yaml"
-      responses:
-        '200':
-          description: Updated the shop details
-          content:
-            application/json:
-              schema:
-                $ref: "../schema/successResponse.yaml"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                $ref: "../schema/errorResponse.yaml"
+  summary: Updating the shop details
+  operationId: updateShopByShopId
+  parameters:
+    name: shopId
+    in: path
+    required: true
+    schema:
+      type: string
+  responses:
+    "200":
+      description: Updated the shop details
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/successResponse.yaml"
+    "404":
+      description: not found
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/errorResponse.yaml"
 delete:
-      summary: deleting the shop
-      operationId: shopId
-      parameters:
-        name: shopId
-        in: path
-        required: true
-        schema:
-          type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "../schema/shop.yaml"
-      responses:
-        '200':
-          description: deleting the shop
-          content:
-            application/json:
-              schema:
-                type: "../schema/successResponse.yaml"
-        '404':
-          description: shop not found
-          content:
-            application/json:
-              schema:
-                $ref: "../schema/errorResponse.yaml"
+  summary: Deleting the shop
+  operationId: deleteShopByShopId
+  parameters:
+    name: shopId
+    in: path
+    required: true
+    schema:
+      type: string
+  responses:
+    "200":
+      description: Deleting the shop
+      content:
+        application/json:
+          schema:
+            type: "../schema/successResponse.yaml"
+    "404":
+      description: Shop not found
+      content:
+        application/json:
+          schema:
+            $ref: "../schema/errorResponse.yaml"

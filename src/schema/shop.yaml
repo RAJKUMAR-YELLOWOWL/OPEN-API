@@ -2,9 +2,12 @@ type: object
 
 required:
   - id
+  - shopName
 
 properties:
   id:
+    type: string
+  shopName:
     type: string
   inventory: 
     type: array

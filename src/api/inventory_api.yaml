@@ -1,6 +1,6 @@
 post:
   summary: Adding the inventory
-  operationId: AddingInventoryById
+  operationId: addingInventoryByInventoryId
   requestBody:
     required: true
     content:
@@ -23,26 +23,25 @@ post:
 
 get:
   summary: Getting the inventory details
-  operationId: GettingInventoryById
+  operationId: gettingInventoryByInventoryId
   parameters:
-    name: inventoryId
-    in: path
+  - name: inventoryId
+    in: path 
     required: true
     schema: 
       type: string
-  requestBody:
+  - name: shopId
+    in: path 
     required: true
-    content:
-      application/json:
-        schema:
-          $ref: "../schema/inventory.yaml"
+    schema: 
+      type: string
   responses:
     '200':
       description: Inventory details fetched successfully
       content:
         application/json:
           schema:
-            $ref: "../schema/successResponse.yaml"
+            $ref: "../schema/inventory_req.yaml"
     '404':
       description: Error fetching inventory
       content:
@@ -52,18 +51,18 @@ get:
     
 put:
   summary: Updating the inventory details
-  operationId: UpdateInventoryById
+  operationId: updateInventoryByInventoryId
   parameters:
-    name: inventoryId
+  - name: inventoryId
     in: path
     required: true
     schema: 
       type: string
-  requestBody:
-    content:
-      application/json:
-        schema:
-          $ref: "../schema/inventory.yaml"
+  - name: shopId
+    in: path
+    required: true
+    schema: 
+      type: string
   responses:
     '200':
       description: Inventory updated success
@@ -80,18 +79,18 @@ put:
 
 delete:
   summary: Deleting the inventory
-  operationId: inventoryId
+  operationId: deletingInventoryByInventoryId
   parameters:
-    name: inventoryId
+  - name: inventoryId
     in: path
     required: true
     schema: 
       type: string
-  requestBody:
-    content:
-      application/json:
-        schema:
-          $ref: "../schema/inventory.yaml"
+  - name: shopId
+    in: path
+    required: true
+    schema: 
+      type: string
   responses:
     '200':
       description: Inventory deleted successfully
